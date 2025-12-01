@@ -15,6 +15,7 @@ spec:
       containers:
         - name: hello-cicd
           image: rafkaihza78/hello-cicd:latest
+          imagePullPolicy: Always     # 🔥 WAJIB SUPAYA WEB NYA SELALU UPDATE
           ports:
             - containerPort: 3000
 ---
@@ -29,4 +30,4 @@ spec:
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30080
+      nodePort: 30080   # 🔥 FIXED NODEPORT
