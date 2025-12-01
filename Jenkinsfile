@@ -4,6 +4,7 @@ pipeline {
     environment {
         DOCKER_IMAGE = "rafkaihza78/hello-cicd"
         DOCKER_TAG   = "latest"
+        KUBECONFIG   = "/var/jenkins_home/kube-jenkins.config"
     }
 
     // 🔔 Trigger lewat webhook (GitHub)
@@ -43,7 +44,6 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                // asumsi kubeconfig sudah kepasang di ~/.kube di dalam container Jenkins
                 sh 'kubectl apply -f k8s.yaml'
             }
         }
