@@ -24,10 +24,9 @@ kind: Service
 metadata:
   name: hello-cicd-service
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: hello-cicd
   ports:
     - port: 3000
       targetPort: 3000
-      nodePort: 30080   # 🔥 FIXED NODEPORT
