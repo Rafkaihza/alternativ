@@ -7,12 +7,13 @@ pipeline {
         KUBECONFIG   = "/var/jenkins_home/kube-jenkins.config"
     }
 
-    // 🔔 Trigger lewat webhook (GitHub)
+    // 🔔 Trigger lewat GitHub Webhook
     triggers {
         githubPush()
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
@@ -44,7 +45,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s.yaml'
+                sh """
+                  kubectl apply -f k8s.yaml
+                  kubectl rollout restart deployment hello-cicd-deployment
+                """
             }
         }
     }
